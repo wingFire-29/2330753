@@ -117,3 +117,23 @@ Note: Access tokens and secrets should never be committed to version control.
 
 ---
 
+## Challenges Faced and Resolutions
+
+### Access Token Expiration
+
+During development, API requests to the notification service occasionally returned **401 Unauthorized** errors.
+
+#### Cause
+
+The access token provided by the authentication service has a limited validity period and expired during testing.
+
+#### Resolution
+
+* Re-authenticated using the provided authentication endpoint.
+* Generated a fresh access token.
+* Updated the token configuration in `src/config/token.js`.
+* Restarted the application and verified successful API communication.
+
+#### Outcome
+
+Notification fetching, logging, and Stage 1 functionality resumed successfully after token renewal.
